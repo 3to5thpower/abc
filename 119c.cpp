@@ -1,33 +1,41 @@
-#include <iostream>
-#include <vector>
+#include<bits/stdc++.h>
 using namespace std;
 
-int n,a,b,c,cost=0,a1,b1,c1;
+#define ll long long
+#define INF 99999999
+#define rep(i,n) for(int i=0,temp=(int)(n);i<temp;++i) //vec.size()がnの時等の高速化
+#define all(x) (x).begin,(x).end()
+#define SORT(v, n) sort(v, v+n);
+#define VSORT(v) sort(v.begin(), v.end());
+
+template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
+template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
+int gcd(int a,int b){return b?gcd(b,a%b):a;}
+
+int n,a,b,c;
 vector<int> l;
 
-int min3(int n){
-  if(abs(a1-n) < abs(b1-n) && abs(a1-n) < abs(c1-n)){
-    
-    if(a==a1) return a1=abs(a1-n);
-    return a1=abs(a1-n)+10;
+int rec(int aa, int bb, int cc, int i){
+
+  if(i == n-1){ 
+    if(!aa||!bb||!cc) return INF;
+    return abs(aa-a) + abs(bb-b) + abs(cc-c);
   }
-  if(abs(b1-n) < abs(c1-n) && abs(b1-n) < abs(a1-n)){
-    if(b==b1) return b1=abs(b1-n);
-    return b1=abs(b1-n)+10;
-  }
-  if(c==c1) return c1=abs(c1-n);
-  return c1=abs(c1-n)+10;
+  int res=INF;
+  chmin(res,rec(a+l[i],b,c,i+1)+(a?10:0));
+  chmin(res,rec(a,b+l[i],c,i+1)+(a?10:0));
+  chmin(res,rec(a,b,c+l[i],i+1)+(a?10:0));
+  chmin(res,rec(a,b,c,i+1));
+
+  return res;
 }
+
+
 
 int main(){
   cin >> n >> a >> b >> c;
-  a1=a;b1=b;c1=c;
-  for(int i=0;i<n;++i) cin >> l[i];
+  l.resize(n);
+  rep(i,n) cin >> l[i];
 
-  for(int i=0;i<n;++i){
-    cost+=min3(l[i]);
-  }
-  cout << cost << endl;
-  return 0;
+  cout << rec(0,0,0,0) << endl;
 }
-
