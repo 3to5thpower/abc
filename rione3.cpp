@@ -1,10 +1,4 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<stack>
-#include<queue>
-#include<string>
-#include<cmath>
+#include<bits/stdc++.h>
 using namespace std;
 
 #define ll long long
