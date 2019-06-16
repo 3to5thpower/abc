@@ -20,11 +20,21 @@ int gcd(int a,int b){return b?gcd(b,a%b):a;}
 int ctoi(char c) {return c-'0';}
 //(lambda (x y) (< x y)) => [](int x, int y) -> int { return x<y; }
 
-int main(){
-  int a,b,c;cin >> a >> b >> c;
-  if(a>=c&&c>=b||a<=c&&c<=b) cout << "Yes" << endl;
-  else cout << "No" << endl;
 
+int main(void){
+  int n;cin>>n;
+  vint a(n);vin(a);
+
+  //両側からの累積gcdを求める
+  vint left(n+1,0),right(n+1,0);//端っこは0
+  for(int i=0;i<n;++i) left[i+1]=gcd(left[i],a[i]);
+  for(int i=n-1;i>=0;--i) right[i]=gcd(right[i+1],a[i]);
+
+  int ans=0;
+  //left[i-1]とright[i+1]のgcdを求める
+  rep(i,n)
+    chmax(ans,gcd(left[i],right[i+1]));
+
+  cout << ans << endl;
   return 0;
 }
-

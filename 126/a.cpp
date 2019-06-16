@@ -13,6 +13,7 @@ using namespace std;
 #define vint vector<int>
 #define vvint vector<vector<int>>
 #define vin(v) rep(i,v.size()) {cin >> v[i];}
+#define tosmall(c) c-('A'-'a');
 
 template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
@@ -20,11 +21,13 @@ int gcd(int a,int b){return b?gcd(b,a%b):a;}
 int ctoi(char c) {return c-'0';}
 //(lambda (x y) (< x y)) => [](int x, int y) -> int { return x<y; }
 
-int main(){
-  int a,b,c;cin >> a >> b >> c;
-  if(a>=c&&c>=b||a<=c&&c<=b) cout << "Yes" << endl;
-  else cout << "No" << endl;
+
+int main(void){
+  int n,k;
+  string s;
+  cin >> n >> k >> s;k--;
+  s[k]=tosmall(s[k]);
+  cout << s << endl;
 
   return 0;
 }
-

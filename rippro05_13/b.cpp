@@ -20,11 +20,27 @@ int gcd(int a,int b){return b?gcd(b,a%b):a;}
 int ctoi(char c) {return c-'0';}
 //(lambda (x y) (< x y)) => [](int x, int y) -> int { return x<y; }
 
-int main(){
-  int a,b,c;cin >> a >> b >> c;
-  if(a>=c&&c>=b||a<=c&&c<=b) cout << "Yes" << endl;
-  else cout << "No" << endl;
+
+int main(void){
+  int n,ans=0;cin >> n;
+  vector<pair<char,int>> ca;
+  rep(i,n){
+    pair<char,int> t;
+    cin >> t.first >> t.second;
+    if(t.first == '+')
+      ca.insert(ca.begin(),t);
+    else if(t.first == '*' && t.second)
+      ca.push_back(t);
+  }
+  rep(i,ca.size()){
+    if(ca[i].first=='+')
+      ans += ca[i].second;
+    else
+      ans *= ca[i].second;
+  }
+  cout << ans << endl;
+  
+
 
   return 0;
 }
-

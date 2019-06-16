@@ -3,8 +3,8 @@ using namespace std;
 
 #define ll long long
 #define INF 99999999
-#define rep(i,n) for(int i=0,temp=(int)(n);i<temp;++i) //vec.size()がnの時等の高速化
-#define loop(i,start,end) for(int i=start,temp=(int)(end);i<end;++i)
+#define rep(i,n) for(int i=0,temp=(int)(n);i<temp;++i) 
+#define repi(i,start,end) for(int i=start,temp=(int)(end);i<end;++i)
 #define rfor(v,x) for(const auto& x : v) //xは値を表す
 #define all(x) (x).begin(),(x).end()
 #define SORT(v, n) sort(v, v+n)
@@ -13,6 +13,7 @@ using namespace std;
 #define vint vector<int>
 #define vvint vector<vector<int>>
 #define vin(v) rep(i,v.size()) {cin >> v[i];}
+#define int long long
 
 template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
@@ -20,11 +21,20 @@ int gcd(int a,int b){return b?gcd(b,a%b):a;}
 int ctoi(char c) {return c-'0';}
 //(lambda (x y) (< x y)) => [](int x, int y) -> int { return x<y; }
 
-int main(){
-  int a,b,c;cin >> a >> b >> c;
-  if(a>=c&&c>=b||a<=c&&c<=b) cout << "Yes" << endl;
-  else cout << "No" << endl;
 
+signed main(void){
+  int n,k;cin >> n >> k;
+  int ans=0;
+  vint a(n+1,0);
+  rep(i,n){cin >> a[i+1];a[i+1]+=a[i];}
+  
+  repi(i,1,n+1){
+    int cmp=k+a[i-1];
+    int pos=i;
+    if(cmp>a.back())break;
+    while(cmp>a[pos])pos++;
+    ans += n-pos+1;
+  }
+  cout << ans << endl;
   return 0;
 }
-

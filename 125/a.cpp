@@ -20,11 +20,11 @@ int gcd(int a,int b){return b?gcd(b,a%b):a;}
 int ctoi(char c) {return c-'0';}
 //(lambda (x y) (< x y)) => [](int x, int y) -> int { return x<y; }
 
-int main(){
-  int a,b,c;cin >> a >> b >> c;
-  if(a>=c&&c>=b||a<=c&&c<=b) cout << "Yes" << endl;
-  else cout << "No" << endl;
+
+int main(void){
+  int a,b,t;cin >> a >> b >> t;
+  cout << (t/a)*b << endl;
+  
 
   return 0;
 }
-
