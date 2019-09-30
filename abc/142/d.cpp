@@ -29,18 +29,19 @@ signed main(void){
   if(b>a) swap(a,b);
   int g=gcd(a,b);
   int num=g;
+
+  
   int ans=1;
-  if(num%2==0){
+  
+  //自身を除く素因数の数を計測
+  for(int i=2;i*i<=g;++i){
+    if(num%i)continue;
     ans++;
-    while(num%2==0)num/=2;
-  }
-  bool primeg=true;
-  for(int i=3;i*i<=g;i+=2){
-    if(num%i!=0)continue;
-    ans++;primeg=false;
     while(num%i==0)num/=i;
   }
-  if(g!=1&&primeg)ans++;
+
+  //割り切ったあとが1でなければgcdが素数なので1追加
+  if(num!=1)ans++;
 
   printf("%lld\n",ans);
 }
